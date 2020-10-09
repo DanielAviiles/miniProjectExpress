@@ -1,0 +1,191 @@
+{{> head}}
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      {{> navbar}}
+      {{> sidenav}}
+      
+      <div class="content-wrapper">
+        {{> headerPageContent}}
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Informacion de los {{titleHeader}}</h3>
+                    <button class="btn btn-success float-right" data-toggle="modal" data-target="#addUser">
+                      <i class="nav-icon fas fa-user-plus"></i>
+                    </button>
+                    <div class="modal fade" id="addUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <form action="/infoshop/usuarios" method="POST">
+                            <div class="modal-header bg-secondary">
+                              <h5 class="modal-title" id="staticBackdropLabel">Agregar Usuario</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Nombre Completo: </label>
+                                <input type="text" class="form-control" name="fullnamemodaladd">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Identificacion: </label>
+                                <input type="text" class="form-control" name="identifmodaladd">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Celular: </label>
+                                <input type="text" class="form-control" name="celmodaladd">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Email: </label>
+                                <input type="email" class="form-control" name="emailmodaladd">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Direccion: </label>
+                                <input type="text" class="form-control" name="direcmodaladd">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Rol: </label>
+                                <select class="form-control" name="rolmodaladd">
+                                  <option value="-1" selected>Seleccione...</option>
+                                  {{#each roles}}
+                                    <option value="{{rol_id}}">{{namerol}}</option>
+                                  {{/each}}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="userTable" class="table table-striped">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>Nombre Completo</th>
+                          <th>Identificacion</th>
+                          <th>Celular</th>
+                          <th>Rol</th>
+                          <th>Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each datauser}}
+                          <tr>
+                            <td>{{username}}</td>
+                            <td>{{identificacion}}</td>
+                            <td>{{celular}}</td>
+                            <td>{{rolname}}</td>
+                            <td>
+                              <button class="btn btn-info" data-toggle="modal" data-target="#modifyUser{{id}}">
+                                <i class="nav-icon fas fa-user-edit"></i>
+                              </button>
+                              <button class="btn btn-danger" data-toggle="modal" data-target="#eliminarUser{{id}}">
+                                <i class="nav-icon fas fa-user-minus"></i>
+                              </button>
+                            </td>
+                          </tr>
+                          <!-- Modal Modify -->
+                          <div class="modal fade" id="modifyUser{{id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                              <div class="modal-content">
+                                <form action="/infoshop/editar-user/{{id}}" method="POST">
+                                  <div class="modal-header bg-warning">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Modificar información</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Nombre Completo: </label>
+                                      <input type="text" class="form-control" name="fullnamemodify" value="{{username}}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Identificacion: </label>
+                                      <input type="text" class="form-control" name="identifmodify" value="{{identificacion}}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Celular: </label>
+                                      <input type="text" class="form-control" name="celmodify" value="{{celular}}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Email: </label>
+                                      <input type="email" class="form-control" name="emailmodify" value="{{email}}">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Direccion: </label>
+                                      <input type="text" class="form-control" name="direcmodify" value="{{direccion}}">
+                                    </div>
+                                    {{!-- <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label">Rol: </label>
+                                      <select class="form-control" name="rolmodify">
+                                        <option value="{{rol_idUser}}" selected>{{rolname}}</option>
+                                        {{#each roles}}
+                                          <option value="{{rol_id}}">{{namerol}}</option>
+                                        {{/each}}
+                                      </select>
+                                    </div> --}}
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Modal Eliminar -->
+                          <div class="modal fade" id="eliminarUser{{id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                              <div class="modal-content">
+                                <form action="/infoshop/eliminar-user/{{id}}" method="POST">
+                                  <div class="modal-header bg-danger">
+                                    <h5 class="modal-title" id="staticBackdropLabel">ADVERTENCIA</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      <p>
+                                        Esta seguro que desea eliminar la informacion de <b> {{username}} </b>
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {{> footerContent}}
+
+    </div>
+
+{{> foot}}

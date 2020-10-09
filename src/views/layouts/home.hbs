@@ -1,0 +1,280 @@
+{{> head}}
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      {{> navbar}}
+      {{> sidenav}}
+
+      <!-- Contenido principal del sitio WEB -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        {{> headerPageContent}}
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+              <!-- Left col -->
+              <section class="col-lg-7 connectedSortable">
+                <!-- Custom tabs (Charts with tabs)-->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">
+                          <i class="fas fa-chart-pie mr-1"></i>
+                          Ventas
+                        </h3>
+                        <div class="card-tools">
+                          <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                              <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div><!-- /.card-header -->
+                      <div class="card-body">
+                        <div class="tab-content p-0">
+                          <!-- Morris chart - Sales -->
+                          <div class="chart tab-pane active" id="revenue-chart"
+                              style="position: relative; height: 300px;">
+                              <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                          </div>
+                          <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                            <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                          </div>
+                        </div>
+                      </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title"><b>TOP Mejores Clientes</b></h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body p-0">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th style="width: 10px">#</th>
+                              <th>Nombre</th>
+                              <th>Progress</th>
+                              <th style="width: 40px">Label</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1.</td>
+                              <td>Daniel Aviles</td>
+                              <td>
+                                <div class="progress progress-xs">
+                                  <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                </div>
+                              </td>
+                              <td><span class="badge bg-danger">55%</span></td>
+                            </tr>
+                            <tr>
+                              <td>2.</td>
+                              <td>Robinson Villabon</td>
+                              <td>
+                                <div class="progress progress-xs">
+                                  <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                </div>
+                              </td>
+                              <td><span class="badge bg-warning">70%</span></td>
+                            </tr>
+                            <tr>
+                              <td>3.</td>
+                              <td>Leonardo Pinzon</td>
+                              <td>
+                                <div class="progress progress-xs progress-striped active">
+                                  <div class="progress-bar bg-primary" style="width: 30%"></div>
+                                </div>
+                              </td>
+                              <td><span class="badge bg-primary">30%</span></td>
+                            </tr>
+                            <tr>
+                              <td>4.</td>
+                              <td>Mike Done</td>
+                              <td>
+                                <div class="progress progress-xs progress-striped active">
+                                  <div class="progress-bar bg-success" style="width: 90%"></div>
+                                </div>
+                              </td>
+                              <td><span class="badge bg-success">90%</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+              </section>
+              <!-- Left col END -->
+
+              <!-- Right col -->
+              <section class="col-lg-5 connectedSortable">
+                <!-- /.row -->
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <button class="btn btn-danger btn-block">GENERAR PDF</button>
+                  </div>
+                </div>
+                <!-- /.row -->
+
+                <!-- /.row -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title"><b>Ultimos Pedidos</b></h3>
+
+                        <div class="card-tools">
+                          <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                          <thead>
+                            <tr>
+                              <th>Order Ref</th>
+                              <th>Cliente</th>
+                              <th>Fecha</th>
+                              <th>Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>COD1049</td>
+                              <td>John Doe</td>
+                              <td>11-7-2014</td>
+                              <td><span class="badge badge-pill badge-success">Aprobado</span></td>
+                            </tr>
+                            <tr>
+                              <td>COD1048</td>
+                              <td>Alexander...</td>
+                              <td>11-7-2014</td>
+                              <td><span class="badge badge-pill badge-primary">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                              <td>COD1047</td>
+                              <td>Bob Doe</td>
+                              <td>11-7-2014</td>
+                              <td><span class="badge badge-pill badge-success">Aprobado</span></td>
+                            </tr>
+                            <tr>
+                              <td>COD1046</td>
+                              <td>Mike Doe</td>
+                              <td>11-7-2014</td>
+                              <td><span class="badge badge-pill badge-danger">Denegado</span></td>
+                            </tr>
+                            <tr>
+                              <td>COD1045</td>
+                              <td>Mike Doe</td>
+                              <td>11-7-2014</td>
+                              <td><span class="badge badge-pill badge-danger">Denegado</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+                <!-- /.row -->
+
+                <!-- /.row -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title"><b>Productos Vendidos</b></h3>
+
+                        <div class="card-tools">
+                          <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                          <thead>
+                            <tr>
+                              <th>Order Ref</th>
+                              <th>Producto</th>
+                              <th>Cantidad Ventas</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>PRO1049</td>
+                              <td>Gorra</td>
+                              <td>1000</td>
+                            </tr>
+                            <tr>
+                              <td>PRO1048</td>
+                              <td>iPhonXS</td>
+                              <td>5000</td>
+                            </tr>
+                            <tr>
+                              <td>PRO1047</td>
+                              <td>Cuadernos</td>
+                              <td>200</td>
+                            </tr>
+                            <tr>
+                              <td>PRO1046</td>
+                              <td>Gomitas</td>
+                              <td>320</td>
+                            </tr>
+                            <tr>
+                              <td>PRO1045</td>
+                              <td>Mac Book</td>
+                              <td>6000</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                </div>
+                <!-- /.row -->
+              </section>
+              <!-- Right col END -->
+            </div>
+            <!-- /.row (main row) -->
+          </div>
+        </section>
+        <!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      {{> footerContent}}
+    </div>
+{{> foot}}
