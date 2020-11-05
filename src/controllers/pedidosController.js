@@ -11,7 +11,20 @@ async function userEspecifico(req) {
   return dataUser;
 }
 
+async function listarProductos() {
+  const dataProductos = await pedidosModel.mostrarProductos();
+  return dataProductos;
+}
+
+async function productoEspecifico(req) {
+  const { id_product } = req.body;
+  const dataProductos = await pedidosModel.productoEspecifico(id_product);
+  return dataProductos;
+}
+
 module.exports = {
   listarUsuarios,
-  userEspecifico
+  userEspecifico,
+  listarProductos,
+  productoEspecifico
 };

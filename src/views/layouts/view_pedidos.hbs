@@ -11,13 +11,15 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
+
+                  <!-- card-header -->
                   <div class="card-header">
                     <h3 class="card-title">Informacion de los {{titleHeader}}</h3>
                     <button class="btn btn-success float-right" data-toggle="modal" data-target="#addPedido">
                       <i class="nav-icon fas fa-plus-circle"></i>
                     </button>
-                    <div class="modal fade" id="addPedido" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                    <div class="modal fade" id="addPedido" role="dialog" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                           <form action="/lista/pedidos/addPedido" method="POST">
                             <div class="modal-header bg-secondary">
@@ -51,37 +53,25 @@
                                   </div> --}}
                                 </div>
                                 <div class="card-body">
-                                  <table id="addPedido" class="table table-striped">
-                                    <thead class="thead-dark">
-                                      <tr>
-                                        <th>Producto</th>
-                                        <th>Valor Unitario</th>
-                                        <th>Cantidad</th>
-                                        <th>Valor Total</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <td>
-                                        <div class="row">
-                                          <div class="col-lg-12">
-                                            <select class="col-form-control" name="pedidoSeleccion">
-                                              <option selected disabled>Choose..</option>
-                                              <option selected>Hola</option>
-                                            </select>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <input type="text" class="col-lg-12 col-form-control" disabled>
-                                      </td>
-                                      <td>
-                                        <input type="number" class="col-lg-12 col-form-control" min="1" name="cantidadPedido">
-                                      </td>
-                                      <td>
-                                        <input type="number" class="col-lg-12 col-form-control" disabled>
-                                      </td>
-                                    </tbody>
-                                  </table>
+                                  <div class="col-lg-12 mb-5">
+                                    <button type="button" class="btn btn-success float-right" onclick="addCompra()" id="btnAddCompra">
+                                      <i class="nav-icon fas fa-plus-circle"></i>
+                                    </button>
+                                  </div>
+                                  <div class="table-responsive">
+                                    <table class="table table-striped">
+                                      <thead class="thead-dark">
+                                        <tr>
+                                          <th>Producto</th>
+                                          <th>Valor Unitario</th>
+                                          <th>Cantidad</th>
+                                          <th>Valor Total</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="tableAddProductoPedido">
+                                      </tbody>
+                                    </table>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -95,91 +85,94 @@
                     </div>
                   </div>
                   <!-- /.card-header -->
+
                   <div class="card-body">
-                    <table id="productTable" class="table table-striped">
-                      <thead class="thead-dark">
-                        <tr>
-                          <th>Cod. Pedido</th>
-                          <th>Valor Total</th>
-                          <th>Usuario</th>
-                          <th>Celular</th>
-                          <th>Estado</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>COD001</td>
-                          <td>$30000</td>
-                          <td>Leonardo</td>
-                          <td>320256444</td>
-                          <td><span class="badge badge-pill badge-primary">Pendiente</span></td>
-                          <td>
-                            <button class="btn btn-info rounded-circle" data-toggle="modal" data-target="#detailProduct">
-                              <i class="nav-icon fas fa-info-circle"></i>
-                            </button>
-                            <label for="detalles">detalles</label>
-                          </td>
-                        </tr>
-                        <!-- Modal Detalle Pedido -->
-                        <div class="modal fade" id="detailProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div class="modal-content">
-                              <div class="modal-header bg-secondary">
-                                <h5 class="modal-title" id="staticBackdropLabel">Detalle del pedido</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="card">
-                                  <div class="card-header">
-                                    <div class="row">
-                                      <label for="staticEmail" class="col-sm-3 col-form-label">Nombre: </label>
-                                      <label for="" class="col-sm-3 col-form-label">Leonardo</label>
-                                      <label for="staticEmail" class="col-sm-3 col-form-label">Celular: </label>
-                                      <label for="" class="col-sm-3 col-form-label">320256444</label>
+                    <div class="table-responsive">
+                      <table id="productTable" class="table table-striped">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>Cod. Pedido</th>
+                            <th>Valor Total</th>
+                            <th>Usuario</th>
+                            <th>Celular</th>
+                            <th>Estado</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>COD001</td>
+                            <td>$30000</td>
+                            <td>Leonardo</td>
+                            <td>320256444</td>
+                            <td><span class="badge badge-pill badge-primary">Pendiente</span></td>
+                            <td>
+                              <button class="btn btn-info rounded-circle" data-toggle="modal" data-target="#detailProduct">
+                                <i class="nav-icon fas fa-info-circle"></i>
+                              </button>
+                              <label for="detalles">detalles</label>
+                            </td>
+                          </tr>
+                          <!-- Modal Detalle Pedido -->
+                          <div class="modal fade" id="detailProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                              <div class="modal-content">
+                                <div class="modal-header bg-secondary">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Detalle del pedido</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <div class="row">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label">Nombre: </label>
+                                        <label for="" class="col-sm-3 col-form-label">Leonardo</label>
+                                        <label for="staticEmail" class="col-sm-3 col-form-label">Celular: </label>
+                                        <label for="" class="col-sm-3 col-form-label">320256444</label>
+                                      </div>
+                                      <div class="row">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label">Codigo: </label>
+                                        <label for="" class="col-sm-3 col-form-label">COD001</label>
+                                        <label for="staticEmail" class="col-sm-3 col-form-label">Estado: </label>
+                                        <select class="custom-select col-sm-3" >
+                                          <option selected>Pendiente</option>
+                                          <option>Cancelado</option>
+                                          <option>Confirmado</option>
+                                          <option>Despachado</option>
+                                          <option>Entregado</option>
+                                        </select>
+                                      </div>
                                     </div>
-                                    <div class="row">
-                                      <label for="staticEmail" class="col-sm-3 col-form-label">Codigo: </label>
-                                      <label for="" class="col-sm-3 col-form-label">COD001</label>
-                                      <label for="staticEmail" class="col-sm-3 col-form-label">Estado: </label>
-                                      <select class="custom-select col-sm-3" >
-                                        <option selected>Pendiente</option>
-                                        <option>Cancelado</option>
-                                        <option>Confirmado</option>
-                                        <option>Despachado</option>
-                                        <option>Entregado</option>
-                                      </select>
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <label for="" class="col-lg-3 border p-1">Pedido</label>
+                                        <label for="" class="col-lg-3 border p-1">V. unitario</label>
+                                        <label for="" class="col-lg-3 border p-1">Cantidad</label>
+                                        <label for="" class="col-lg-3 border p-1">V. total</label>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="row">
-                                      <label for="" class="col-lg-3 border p-1">Pedido</label>
-                                      <label for="" class="col-lg-3 border p-1">V. unitario</label>
-                                      <label for="" class="col-lg-3 border p-1">Cantidad</label>
-                                      <label for="" class="col-lg-3 border p-1">V. total</label>
-                                    </div>
-                                  </div>
-                                  <div class="card-footer">
-                                    <div class="row">
-                                      <div class="col-lg-12">
-                                        <label for="" class="float-lg-right">Total pedido: $</label>
+                                    <div class="card-footer">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                          <label for="" class="float-lg-right">Total pedido: $</label>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary">Guardar Pedido</button>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                  <button type="button" class="btn btn-primary">Guardar Pedido</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <!-- /.card-body -->
                 </div>

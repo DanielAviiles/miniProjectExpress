@@ -30,4 +30,14 @@ router.post('/pedidos/infoUsuario', async (req, res) => {
   res.json({ resp: infoUser });
 });
 
+router.get('/pedidos/listaproductos', async (req, res) => {
+  const infoProductos = await pedidoController.listarProductos();
+  res.json({ dataProductos: infoProductos });
+});
+
+router.post('/pedidos/pedidoEspecifico', async (req, res) => {
+  const infoProduct = await pedidoController.productoEspecifico(req);
+  res.json({ resp: infoProduct });
+});
+
 module.exports = router;

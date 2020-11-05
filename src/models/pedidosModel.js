@@ -10,7 +10,19 @@ async function usuarioEspecifico(id_usuario) {
   return dataUser;
 }
 
+async function mostrarProductos() {
+  const dataProductos = await pool.query('SELECT id, nombre FROM producto');
+  return dataProductos;
+}
+
+async function productoEspecifico(id_product) {
+  const dataUser = await pool.query(`SELECT valor FROM producto WHERE id = ${id_product}`);
+  return dataUser;
+}
+
 module.exports = {
   mostrarUsuarios,
-  usuarioEspecifico
+  usuarioEspecifico,
+  mostrarProductos,
+  productoEspecifico
 };
