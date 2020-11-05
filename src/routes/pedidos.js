@@ -5,8 +5,8 @@ const pedidoController = require('../controllers/pedidosController');
 // const pool = require('../database');
 
 /* GET home page. */
+// Trae la informacion de los usuarios para modal de agregar un pedido
 router.get('/pedidos', async (req, res) => {
-  // const productos = await pool.query(`SELECT * FROM producto WHERE estado = 0`);
   const usuarios = await pedidoController.listarUsuarios();
   res.render('layouts/view_pedidos', {
     title: `Lista Pedidos`,
@@ -14,14 +14,10 @@ router.get('/pedidos', async (req, res) => {
     usuarios
   });
 });
+
+// Trae la informacion de los usuarios para modal de agregar un pedido
 router.post('/pedidos/addPedido', async (req, res) => {
-  // const productos = await pool.query(`SELECT * FROM producto WHERE estado = 0`);
-  const usuarios = await pedidoController.listarUsuarios();
-  res.render('layouts/view_pedidos', {
-    title: `Lista Pedidos`,
-    titleHeader: `Pedidos`,
-    usuarios
-  });
+  res.render('layouts/view_pedidos', { title: `Lista Pedidos`, titleHeader: `Pedidos` });
 });
 
 // AJAX

@@ -3,7 +3,6 @@ $(document).ready(function () {
   $("#userTable").DataTable({
     "responsive": true, "lengthChange": true, "autoWidth": false,
     "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-    // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     "buttons": ["copy", "excel", "pdf", "print"],
     "language": {
       "zeroRecords": "No hay datos disponibles en la tabla",
