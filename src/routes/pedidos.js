@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pedidoController = require('../controllers/pedidosController');
 
-const pool = require('../database');
+// const pool = require('../database');
 
 /* GET home page. */
 router.get('/pedidos', async (req, res) => {
@@ -26,8 +26,7 @@ router.post('/pedidos/addPedido', async (req, res) => {
 
 // AJAX
 router.post('/pedidos/infoUsuario', async (req, res) => {
-  const { id_usuario } = req.body;
-  const infoUser = await pool.query(`SELECT identificacion, celular FROM usuarios WHERE id = ${id_usuario}`);
+  const infoUser = await pedidoController.userEspecifico(req);
   res.json({ resp: infoUser });
 });
 

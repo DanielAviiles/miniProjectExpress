@@ -5,8 +5,9 @@ async function listarUsuarios() {
   return dataUsers;
 }
 
-async function userEspecifico(id_user) {
-  const dataUser = await pedidosModel.usuarioEspecifico(id_user);
+async function userEspecifico(req) {
+  const { id_usuario } = req.body;
+  const dataUser = await pedidosModel.usuarioEspecifico(id_usuario);
   return dataUser;
 }
 

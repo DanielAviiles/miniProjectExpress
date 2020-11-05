@@ -5,8 +5,8 @@ async function mostrarUsuarios() {
   return dataUsers;
 }
 
-async function usuarioEspecifico(userid) {
-  const dataUser = await pool.query(`SELECT * FROM usuarios WHERE id = ${userid}`);
+async function usuarioEspecifico(id_usuario) {
+  const dataUser = await pool.query(`SELECT identificacion, celular FROM usuarios WHERE id = ${id_usuario}`);
   return dataUser;
 }
 
