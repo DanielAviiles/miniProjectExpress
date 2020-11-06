@@ -56,19 +56,31 @@ async function estadosForPedido() {
 }
 
 async function detailOfPedido(idPedido) {
-  return await pool.query(`SELECT
-                            producto_has_pedido.id,
-                            producto.nombre nameProduct,
-                            producto.valor valorUnitario,
-                            producto_has_pedido.cantidad,
-                            producto_has_pedido.cantidad * producto.valor valorTotalCompra
-                          FROM
-                            producto,
-                            producto_has_pedido,
-                            pedido 
-                          WHERE
-                            producto_has_pedido.producto_id = producto.id AND
-                            producto_has_pedido.pedido_id = ${idPedido}`);
+  let newArr = []
+  const dataPedido =  await pool.query(`SELECT 
+                              producto_has_pedido.id, 
+                              producto.nombre nameProduct, 
+                              producto.valor valorUnitario, 
+                              producto_has_pedido.cantidad, 
+                              producto_has_pedido.cantidad * producto.valor valorTotalCompra,
+                              pedido.id id_pedido
+                            FROM 
+                              producto_has_pedido, 
+                              producto, 
+                              pedido 
+                            WHERE
+                              producto_has_pedido.producto_id = producto.id AND
+                              producto_has_pedido.pedido_id = pedido.id`);
+  const infoPedido = Object.values(JSON.parse(JSON.stringify(dataPedido)));
+
+  infoPedido.forEach(item => {
+    if (item.id_pedido == idPedido) {
+      newArr.push(item);
+    }
+  });
+  // console.log('Nuevo arreglo desde el back: ', newArr);
+
+  return newArr;
 }
 
 module.exports = {

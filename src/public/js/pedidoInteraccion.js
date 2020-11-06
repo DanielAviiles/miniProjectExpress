@@ -176,4 +176,10 @@ $(document).ready(function () {
     accionAddPedido(iterador1);
   });
 
+  const table = $('#pedidosTable').DataTable();
+  if (!table.data().count()) {
+    console.log('No hay registros');
+  } else {
+    console.log('Total datos: ', table.data().length);
+  }
 });
