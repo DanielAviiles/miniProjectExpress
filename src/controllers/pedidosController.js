@@ -42,11 +42,26 @@ async function infoPedidoAdd(infoPedido, pedidoId) {
   });
 }
 
+async function listarPedidos() {
+  return await pedidosModel.mostrarPedidos();
+}
+
+async function estadosDeUnPedido() {
+  return await pedidosModel.estadosForPedido();
+}
+
+async function detalleDePedido(idPedido) {
+  return await pedidosModel.detailOfPedido(idPedido);
+}
+
 module.exports = {
   listarUsuarios,
   userEspecifico,
   listarProductos,
   productoEspecifico,
   agregarPedido,
-  infoPedidoAdd
+  infoPedidoAdd,
+  listarPedidos,
+  estadosDeUnPedido,
+  detalleDePedido
 };

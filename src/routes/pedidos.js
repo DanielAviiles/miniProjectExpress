@@ -5,10 +5,12 @@ const pedidoController = require('../controllers/pedidosController');
 // Trae la informacion de los usuarios para modal de agregar un pedido
 router.get('/pedidos', async (req, res) => {
   const usuarios = await pedidoController.listarUsuarios();
+  const listaPedidos = await pedidoController.listarPedidos();
   res.render('layouts/view_pedidos', {
     title: `Lista Pedidos`,
     titleHeader: `Pedidos`,
-    usuarios
+    usuarios,
+    listaPedidos
   });
 });
 
@@ -37,6 +39,17 @@ router.get('/pedidos/listaproductos', async (req, res) => {
 router.post('/pedidos/pedidoEspecifico', async (req, res) => {
   const infoProduct = await pedidoController.productoEspecifico(req);
   res.json({ resp: infoProduct });
+});
+
+router.get('/pedidos/detailsPedido/:id_pedido', async (req, res) => {
+  const { id_pedido } = req.params;
+  const dataEstadosPedido = await pedidoController.estadosDeUnPedido();
+  const detailPedido = await pedidoController.detalleDePedido(id_pedido);
+
+  res.json({
+    infoEstados: dataEstadosPedido,
+    detallePedido: detailPedido
+  });
 });
 
 module.exports = router;

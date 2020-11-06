@@ -17,7 +17,7 @@ $(document).ready(function () {
     }
   }).buttons().container().appendTo('#userTable_wrapper .col-md-6:eq(0)');
 
-  $("#productTable").DataTable({
+  $("#pedidosTable").DataTable({
     "responsive": true, "lengthChange": true, "autoWidth": false,
     "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
     // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],

@@ -32,11 +32,53 @@ async function moreInfoPedido(detallePedido) {
   await pool.query('INSERT INTO producto_has_pedido SET ?', [detallePedido]);
 }
 
+async function mostrarPedidos() {
+  return await pool.query(`SELECT
+                            pedido.id pedido_id,
+                            configuracion.valor,
+                            pedido.vTotal,
+                            usuarios.nombre nombreCompleto,
+                            usuarios.celular,
+                            estado.nombre estadoName
+                          FROM
+                            configuracion,
+                            pedido,
+                            usuarios,
+                            estado
+                          WHERE
+                            pedido.id_config = configuracion.id AND
+                            pedido.id_user = usuarios.id AND
+                            pedido.id_estado = estado.id`);
+}
+
+async function estadosForPedido() {
+  return await pool.query('SELECT * FROM estado')
+}
+
+async function detailOfPedido(idPedido) {
+  return await pool.query(`SELECT
+                            producto_has_pedido.id,
+                            producto.nombre nameProduct,
+                            producto.valor valorUnitario,
+                            producto_has_pedido.cantidad,
+                            producto_has_pedido.cantidad * producto.valor valorTotalCompra
+                          FROM
+                            producto,
+                            producto_has_pedido,
+                            pedido 
+                          WHERE
+                            producto_has_pedido.producto_id = producto.id AND
+                            producto_has_pedido.pedido_id = ${idPedido}`);
+}
+
 module.exports = {
   mostrarUsuarios,
   usuarioEspecifico,
   mostrarProductos,
   productoEspecifico,
   addPedido,
-  moreInfoPedido
+  moreInfoPedido,
+  mostrarPedidos,
+  estadosForPedido,
+  detailOfPedido
 };
