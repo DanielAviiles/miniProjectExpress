@@ -20,9 +20,23 @@ async function productoEspecifico(id_product) {
   return dataUser;
 }
 
+async function addPedido(pedidoNuevo) {
+  await pool.query('INSERT INTO pedido SET ?', [pedidoNuevo]);
+  let pedidoId = await pool.query('SELECT LAST_INSERT_ID() pedido_id');
+  let idPedido = Object.values(JSON.parse(JSON.stringify(pedidoId)));
+  console.log('idPedido desde el model: ', idPedido[0].pedido_id);
+  return idPedido[0].pedido_id;
+}
+
+async function moreInfoPedido(detallePedido) {
+  await pool.query('INSERT INTO producto_has_pedido SET ?', [detallePedido]);
+}
+
 module.exports = {
   mostrarUsuarios,
   usuarioEspecifico,
   mostrarProductos,
-  productoEspecifico
+  productoEspecifico,
+  addPedido,
+  moreInfoPedido
 };

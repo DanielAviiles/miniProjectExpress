@@ -22,9 +22,31 @@ async function productoEspecifico(req) {
   return dataProductos;
 }
 
+async function agregarPedido(infoPedido) {
+  const newPedido = {
+    vTotal: infoPedido.vTotalP,
+    id_user: infoPedido.user_id
+  }
+  let idPedido = await pedidosModel.addPedido(newPedido);
+  console.log('idPedido desde el controller: ', idPedido);
+  return idPedido;
+}
+async function infoPedidoAdd(infoPedido, pedidoId) {
+  infoPedido.data.forEach(async (item) => {
+    const dataPedio = {
+      cantidad: item.cantidadP,
+      producto_id: item.producto_id,
+      pedido_id: pedidoId
+    }
+    await pedidosModel.moreInfoPedido(dataPedio);
+  });
+}
+
 module.exports = {
   listarUsuarios,
   userEspecifico,
   listarProductos,
-  productoEspecifico
+  productoEspecifico,
+  agregarPedido,
+  infoPedidoAdd
 };

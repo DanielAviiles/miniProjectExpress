@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pedidoController = require('../controllers/pedidosController');
 
-// const pool = require('../database');
-
-/* GET home page. */
 // Trae la informacion de los usuarios para modal de agregar un pedido
 router.get('/pedidos', async (req, res) => {
   const usuarios = await pedidoController.listarUsuarios();
@@ -15,9 +12,15 @@ router.get('/pedidos', async (req, res) => {
   });
 });
 
-// Trae la informacion de los usuarios para modal de agregar un pedido
-router.post('/pedidos/addPedido', async (req, res) => {
-  res.render('layouts/view_pedidos', { title: `Lista Pedidos`, titleHeader: `Pedidos` });
+router.post('/pedidos', async (req, res) => {
+  let infoPedido = Object.keys(req.body);
+  infoPedido = JSON.parse(infoPedido[0]);
+
+  let pedido_id = await pedidoController.agregarPedido(infoPedido);
+  console.log('idPedido desde el Back: ', pedido_id);
+  await pedidoController.infoPedidoAdd(infoPedido, pedido_id);
+
+  res.redirect('/lista/pedidos');
 });
 
 // AJAX

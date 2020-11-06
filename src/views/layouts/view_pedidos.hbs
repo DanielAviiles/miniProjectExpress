@@ -21,7 +21,7 @@
                     <div class="modal fade" id="addPedido" role="dialog" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
-                          <form action="/lista/pedidos/addPedido" method="POST">
+                          <form action="/lista/pedidos" method="POST">
                             <div class="modal-header bg-secondary">
                               <h5 class="modal-title" id="staticBackdropLabel">Realizar pedido</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -73,11 +73,33 @@
                                     </table>
                                   </div>
                                 </div>
+                                <div class="card-footer">
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" name="chckPedido">
+                                        <label class="form-check-label" for="exampleCheck1">Pedido finalizado</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <label for="" class="col-lg-3 col-form-label-lg float-lg-left">Total a pagar: </span></label>
+                                      <div class="col-lg-9 input-group float-lg-left">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="number" class="form-control" name="vTotalPedido" value="0">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                              {{!-- <button type="submit" class="btn btn-primary">Guardar Cambios</button> --}}
+                              <button type="button" class="btn btn-primary" id="guardarPedido">Guardar Cambios</button>
                             </div>
                           </form>
                         </div>
