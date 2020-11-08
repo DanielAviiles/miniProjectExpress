@@ -128,9 +128,15 @@
                               <td>${{vTotal}} </td>
                               <td>{{nombreCompleto}}</td>
                               <td>{{celular}}</td>
-                              <td><span class="badge badge-pill badge-primary">{{estadoName}}</span></td>
                               <td>
-                                <button class="btn btn-info rounded-circle" data-toggle="modal" data-target="#detailPedido{{pedido_id}}" onclick="detallePedido({{pedido_id}})">
+                                {{#each ../dataEstadosPedido}}
+                                  {{#ifCond nombre "==" ../estadoName}}
+                                    <span class="badge badge-pill badge-{{badge_color}}">{{../estadoName}}</span>
+                                  {{/ifCond}}
+                                {{/each}}
+                              </td>
+                              <td>
+                                <button class="btn btn-info rounded-circle" data-toggle="modal" data-target="#detailPedido{{pedido_id}}">
                                   <i class="nav-icon fas fa-info-circle"></i>
                                 </button>
                                 <label for="detalles">detalles</label>
@@ -161,6 +167,9 @@
                                           <label for="staticEmail" class="col-sm-3 col-form-label">Estado: </label>
                                           <select class="custom-select col-sm-3" name="estadoPedidoRealizado">
                                             <option selected disabled>{{estadoName}}</option>
+                                            {{#each ../dataEstadosPedido}}
+                                              <option value="{{id}}">{{nombre}}</option>
+                                            {{/each}}
                                           </select>
                                         </div>
                                       </div>
@@ -171,12 +180,22 @@
                                           <label for="" class="col-lg-3 border p-1 bg-gradient-gray">Cantidad</label>
                                           <label for="" class="col-lg-3 border p-1 bg-gradient-gray">V. total</label>
                                         </div>
-                                        <div id="reccoridoDataProductosPedidos"></div>
+                                        {{!-- <div id="reccoridoDataProductosPedidos"></div> --}}
+                                        {{#each ../detailPedido}}
+                                          {{#ifCond id_pedido "==" ../pedido_id}}
+                                            <div class="row">
+                                              <label for="" class="col-lg-3 border p-1">{{nameProduct}}</label>
+                                              <label for="" class="col-lg-3 border p-1">{{valorUnitario}}</label>
+                                              <label for="" class="col-lg-3 border p-1">{{cantidad}}</label>
+                                              <label for="" class="col-lg-3 border p-1">{{valorTotalCompra}}</label>
+                                            </div>
+                                          {{/ifCond}}
+                                        {{/each}}
                                       </div>
                                       <div class="card-footer">
                                         <div class="row">
                                           <div class="col-lg-12">
-                                            <label for="" class="float-lg-right">Total pedido: $<span id="spanValorTPedido"></span> </label>
+                                            <label for="" class="float-lg-right">Total pedido: ${{vTotal}}</label>
                                           </div>
                                         </div>
                                       </div>

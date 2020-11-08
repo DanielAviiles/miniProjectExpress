@@ -111,31 +111,6 @@ function addCompra() {
   addPedidoProducto(iterador);
 }
 
-function detallePedido(pedido_id) {
-  let totalCompra = 0;
-  $.ajax({
-    url: `/lista/pedidos/detailsPedido/${pedido_id}`,
-    method: "GET",
-    dataType: "json"
-  }).done(msg => {
-    msg.infoEstados.forEach(info => {
-      opt = `<option value="${info.id}">${info.nombre}</option>`;
-      $(`select[name=estadoPedidoRealizado]`).append(opt);
-    });
-    msg.detallePedido.forEach(item => {
-      info = `<div class="row">
-                <label for="" class="col-lg-3 border p-1">${item.nameProduct}</label>
-                <label for="" class="col-lg-3 border p-1">$${item.valorUnitario}</label>
-                <label for="" class="col-lg-3 border p-1">${item.cantidad}</label>
-                <label for="" class="col-lg-3 border p-1">$${item.valorTotalCompra}</label>
-              </div>`;
-      $('#reccoridoDataProductosPedidos').append(info);
-      totalCompra += item.valorTotalCompra;
-    });
-    $('#spanValorTPedido').text(totalCompra);
-  });
-}
-
 let iterador1 = 0; let valorT = 0;
 $(document).ready(function () {
   $("select[name=userPedido]").change(() => obtenerInfo());

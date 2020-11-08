@@ -6,11 +6,18 @@ const pedidoController = require('../controllers/pedidosController');
 router.get('/pedidos', async (req, res) => {
   const usuarios = await pedidoController.listarUsuarios();
   const listaPedidos = await pedidoController.listarPedidos();
+  const dataEstadosPedido = await pedidoController.estadosDeUnPedido();
+  const detailPedido = await pedidoController.detalleDePedido();
+
+  // console.log('Detalle de pedidos: ', detailPedido);
+
   res.render('layouts/view_pedidos', {
     title: `Lista Pedidos`,
     titleHeader: `Pedidos`,
     usuarios,
-    listaPedidos
+    listaPedidos,
+    dataEstadosPedido,
+    detailPedido
   });
 });
 
@@ -19,7 +26,6 @@ router.post('/pedidos', async (req, res) => {
   infoPedido = JSON.parse(infoPedido[0]);
 
   let pedido_id = await pedidoController.agregarPedido(infoPedido);
-  console.log('idPedido desde el Back: ', pedido_id);
   await pedidoController.infoPedidoAdd(infoPedido, pedido_id);
 
   res.redirect('/lista/pedidos');
@@ -39,17 +45,6 @@ router.get('/pedidos/listaproductos', async (req, res) => {
 router.post('/pedidos/pedidoEspecifico', async (req, res) => {
   const infoProduct = await pedidoController.productoEspecifico(req);
   res.json({ resp: infoProduct });
-});
-
-router.get('/pedidos/detailsPedido/:id_pedido', async (req, res) => {
-  const { id_pedido } = req.params;
-  const dataEstadosPedido = await pedidoController.estadosDeUnPedido();
-  const detailPedido = await pedidoController.detalleDePedido(id_pedido);
-
-  res.json({
-    infoEstados: dataEstadosPedido,
-    detallePedido: detailPedido
-  });
 });
 
 module.exports = router;

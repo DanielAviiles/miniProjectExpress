@@ -28,7 +28,6 @@ async function agregarPedido(infoPedido) {
     id_user: infoPedido.user_id
   }
   let idPedido = await pedidosModel.addPedido(newPedido);
-  console.log('idPedido desde el controller: ', idPedido);
   return idPedido;
 }
 async function infoPedidoAdd(infoPedido, pedidoId) {
@@ -50,8 +49,8 @@ async function estadosDeUnPedido() {
   return await pedidosModel.estadosForPedido();
 }
 
-async function detalleDePedido(idPedido) {
-  return await pedidosModel.detailOfPedido(idPedido);
+async function detalleDePedido() {
+  return await pedidosModel.detailOfPedido();
 }
 
 module.exports = {

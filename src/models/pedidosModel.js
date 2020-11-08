@@ -21,11 +21,8 @@ async function productoEspecifico(id_product) {
 }
 
 async function addPedido(pedidoNuevo) {
-  await pool.query('INSERT INTO pedido SET ?', [pedidoNuevo]);
-  let pedidoId = await pool.query('SELECT LAST_INSERT_ID() pedido_id');
-  let idPedido = Object.values(JSON.parse(JSON.stringify(pedidoId)));
-  console.log('idPedido desde el model: ', idPedido[0].pedido_id);
-  return idPedido[0].pedido_id;
+  let pedidoId = await pool.query('INSERT INTO pedido SET ?', [pedidoNuevo]);
+  return pedidoId.insertId;
 }
 
 async function moreInfoPedido(detallePedido) {
@@ -55,9 +52,8 @@ async function estadosForPedido() {
   return await pool.query('SELECT * FROM estado')
 }
 
-async function detailOfPedido(idPedido) {
-  let newArr = []
-  const dataPedido =  await pool.query(`SELECT 
+async function detailOfPedido() {
+  return await pool.query(`SELECT 
                               producto_has_pedido.id, 
                               producto.nombre nameProduct, 
                               producto.valor valorUnitario, 
@@ -71,16 +67,6 @@ async function detailOfPedido(idPedido) {
                             WHERE
                               producto_has_pedido.producto_id = producto.id AND
                               producto_has_pedido.pedido_id = pedido.id`);
-  const infoPedido = Object.values(JSON.parse(JSON.stringify(dataPedido)));
-
-  infoPedido.forEach(item => {
-    if (item.id_pedido == idPedido) {
-      newArr.push(item);
-    }
-  });
-  // console.log('Nuevo arreglo desde el back: ', newArr);
-
-  return newArr;
 }
 
 module.exports = {
