@@ -2,14 +2,11 @@ const express = require('express');
 const router = express.Router();
 const pedidoController = require('../controllers/pedidosController');
 
-// Trae la informacion de los usuarios para modal de agregar un pedido
 router.get('/pedidos', async (req, res) => {
   const usuarios = await pedidoController.listarUsuarios();
   const listaPedidos = await pedidoController.listarPedidos();
   const dataEstadosPedido = await pedidoController.estadosDeUnPedido();
   const detailPedido = await pedidoController.detalleDePedido();
-
-  // console.log('Detalle de pedidos: ', detailPedido);
 
   res.render('layouts/view_pedidos', {
     title: `Lista Pedidos`,
@@ -31,7 +28,14 @@ router.post('/pedidos', async (req, res) => {
   res.redirect('/lista/pedidos');
 });
 
-// AJAX
+router.post('/edit-pedido/:idPedido', async (req, res) => {
+  const { idPedido } = req.params;
+  const body = req.body;
+  await pedidoController.editarPedido(idPedido, body);
+  res.redirect('/lista/pedidos');
+});
+
+// AJAX. START
 router.post('/pedidos/infoUsuario', async (req, res) => {
   const infoUser = await pedidoController.userEspecifico(req);
   res.json({ resp: infoUser });
@@ -46,5 +50,7 @@ router.post('/pedidos/pedidoEspecifico', async (req, res) => {
   const infoProduct = await pedidoController.productoEspecifico(req);
   res.json({ resp: infoProduct });
 });
+
+// AJAX. END
 
 module.exports = router;

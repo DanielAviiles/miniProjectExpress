@@ -69,6 +69,10 @@ async function detailOfPedido() {
                               producto_has_pedido.pedido_id = pedido.id`);
 }
 
+async function editPedido(idPedido, estadoPedido) {
+  await pool.query(`UPDATE pedido SET id_estado=${estadoPedido} WHERE id=${idPedido}`)
+}
+
 module.exports = {
   mostrarUsuarios,
   usuarioEspecifico,
@@ -78,5 +82,6 @@ module.exports = {
   moreInfoPedido,
   mostrarPedidos,
   estadosForPedido,
-  detailOfPedido
+  detailOfPedido,
+  editPedido,
 };

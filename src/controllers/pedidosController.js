@@ -53,6 +53,10 @@ async function detalleDePedido() {
   return await pedidosModel.detailOfPedido();
 }
 
+async function editarPedido(idPedido, body) {
+  await pedidosModel.editPedido(idPedido, body.estadoPedidoRealizado);
+}
+
 module.exports = {
   listarUsuarios,
   userEspecifico,
@@ -62,5 +66,6 @@ module.exports = {
   infoPedidoAdd,
   listarPedidos,
   estadosDeUnPedido,
-  detalleDePedido
+  detalleDePedido,
+  editarPedido
 };
