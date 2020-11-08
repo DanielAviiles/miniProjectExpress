@@ -89,10 +89,7 @@ function addCompra() {
             </td>
             <td>
               <div class="input-group">
-                <div class="input-group-prepend col-lg-2">
-                  <span class="input-group-text" id="basic-addon1">$</span>
-                </div>
-                <input type="number" class="col-lg-10 col-form-control" name="valorUnitarioPedido${iterador}" value="0" disabled>
+                <input type="number" class="col-lg-12 col-form-control" name="valorUnitarioPedido${iterador}" value="0" disabled>
               </div>
             </td>
             <td>
@@ -100,10 +97,7 @@ function addCompra() {
             </td>
             <td>
               <div class="input-group">
-                <div class="input-group-prepend col-lg-2">
-                  <span class="input-group-text" id="basic-addon1">$</span>
-                </div>
-                <input type="number" class="col-lg-10 col-form-control" name="valorTotalPedido${iterador}" value="0" disabled>
+                <input type="number" class="col-lg-12 col-form-control" name="valorTotalPedido${iterador}" value="0" disabled>
               </div>
             </td>
           </tr>`;

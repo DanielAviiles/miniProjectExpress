@@ -48,9 +48,6 @@
                                     <label for="" class="col-sm-3 col-form-label">Celular: </label>
                                     <input type="text" class="col-sm-3 col-form-control" id="celularPedido" disabled>
                                   </div>
-                                  {{!-- <div class="form-group row">
-                                    <button class="btn btn-primary col-sm-12 col-form-control">Buscar</button>
-                                  </div> --}}
                                 </div>
                                 <div class="card-body">
                                   <div class="col-lg-12 mb-5">
@@ -131,7 +128,7 @@
                               <td>
                                 {{#each ../dataEstadosPedido}}
                                   {{#ifCond nombre "==" ../estadoName}}
-                                    <span class="badge badge-pill badge-{{badge_color}}">{{../estadoName}}</span>
+                                    <span class="badge badge-pill badge-{{badge_color}}">{{capitalizar ../estadoName}}</span>
                                   {{/ifCond}}
                                 {{/each}}
                               </td>
@@ -166,9 +163,9 @@
                                           <label for="" class="col-sm-3 col-form-label">{{valor}}</label>
                                           <label for="staticEmail" class="col-sm-3 col-form-label">Estado: </label>
                                           <select class="custom-select col-sm-3" name="estadoPedidoRealizado">
-                                            <option selected disabled>{{estadoName}}</option>
+                                            <option selected disabled>{{capitalizar estadoName}}</option>
                                             {{#each ../dataEstadosPedido}}
-                                              <option value="{{id}}">{{nombre}}</option>
+                                              <option value="{{id}}">{{capitalizar nombre}}</option>
                                             {{/each}}
                                           </select>
                                         </div>
